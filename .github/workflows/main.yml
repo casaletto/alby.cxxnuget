@@ -46,7 +46,6 @@ jobs:
         - name: package 
           env:
             THE_SOURCE_KEY: ${{secrets.PACKAGES}}
-          run:  msbuild sln1\build1.proj /t:source,push "/p:Version=${{steps.version.outputs.new_tag}}" "/p:SourceKey=%THE_SOURCE_KEY%" "/p:SourceUser=${{github.repositoryowner}}"
+          run:  msbuild sln1\build1.proj /t:source,push "/p:Version=${{steps.version.outputs.new_tag}}" "/p:SourceKey=%THE_SOURCE_KEY%" "/p:SourceUser=%GITHUB_REPOSITORY_OWNER%"
           shell: cmd
 
-          
