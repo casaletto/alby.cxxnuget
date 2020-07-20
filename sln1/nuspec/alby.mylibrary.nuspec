@@ -11,6 +11,7 @@
         <description>alby.mylibrary</description>
         <copyright>copyright � 2023 alby</copyright>
         <tags>native C++</tags>
+        <repository type="git" url="https://github.com/casaletto/alby.cxxnuget.git" />
     </metadata>
 
     <files>
