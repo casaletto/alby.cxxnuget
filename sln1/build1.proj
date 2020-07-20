@@ -2,7 +2,11 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 <!--
-msbuild sln1\build1.proj /t:clean,version,build,pack,source,push "/p:Version=${{steps.get_new_version.outputs.new_tag}}" "/p:SourceKey={{secrets.PACKAGES}}" "/p:SourceUser={{github.repositoryowner}}"
+localhost
+msbuild sln1\build1.proj /t:clean,version,build,pack,source,push "/p:Version=0.0.2" "/p:SourceKey=xxx" "/p:SourceUser=xxx"
+
+github actions
+msbuild sln1\build1.proj /t:clean,version,build,pack,source,push "/p:Version=${{steps.get_new_version.outputs.new_tag}}" "/p:SourceKey=${{secrets.PACKAGES}}" "/p:SourceUser=${{github.repositoryowner}}"
 -->
 
     <PropertyGroup>
