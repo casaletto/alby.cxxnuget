@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+<!--
+msbuild sln1\build1.proj /t:clean,version,build,pack,push /p:Version=a.b.c
+msbuild sln2\build2.proj /t:clean,source,restore,update,build,test
+-->
+
+    <PropertyGroup>
+        <Solution>$(MSBuildProjectDirectory)\alby.cxxnuget1.sln</Solution>
+
+        <Version Condition="'$(Version)' == '' ">0.0.0</Version>
+        <Version2>$( [System.String]::Copy( &quot;$(Version)&quot; ).Replace( &quot;.&quot;, &quot;,&quot; ) )</Version2>
+        <VersionFile>$(MSBuildProjectDirectory)\alby.mylibrary\version.h</VersionFile>
+
+        <NuspecFile>alby.mylibrary.nuspec</NuspecFile>
+        <NuspecFolder>$(MSBuildProjectDirectory)\nuspec</NuspecFolder>
+
+        <NupkgFolder>$(MSBuildProjectDirectory)\..\nupkg</NupkgFolder>
+        <NupkgVersionFile>$(MSBuildProjectDirectory)\..\nupkg\alby.mylibrary.version.txt</NupkgVersionFile>
+    </PropertyGroup>
+
+    <Target Name="clean" >
+        <ItemGroup>
+            <FoldersToDelete Include="$( [System.IO.Directory]::GetDirectories( &quot;.&quot;,&quot;obj&quot;,SearchOption.AllDirectories ) )"/>
+            <FoldersToDelete Include="$( [System.IO.Directory]::GetDirectories( &quot;.&quot;,&quot;bin&quot;,SearchOption.AllDirectories ) )"/>
+            <FoldersToDelete Include="$( [System.IO.Directory]::GetDirectories( &quot;.&quot;,&quot;lib&quot;,SearchOption.AllDirectories ) )"/>
+        </ItemGroup>
+
+        <RemoveDir Directories="@(FoldersToDelete)" />
+    </Target>
+
+    <Target Name="version">
+        <Message Text="$(Version)"/>
+        <Message Text="$(Version2)"/>
+
+        <PropertyGroup>
+            <VersionLines>
+#pragma once
+
+#define ALBY_MYLIBRARY_VERSION  "$(Version).0"
+#define ALBY_MYLIBRARY_VERSION2  $(Version2),0
+            </VersionLines>
+        </PropertyGroup>
+
+        <WriteLinesToFile
+            File="$(VersionFile)"
+            Lines="$(VersionLines)"
+            Overwrite="true"
+            Encoding="UTF-8" />
+
+        <WriteLinesToFile
+            File="$(NupkgVersionFile)"
+            Lines="$(Version).0"
+            Overwrite="true"
+            Encoding="ASCII" />
+
+    </Target>
+
+    <Target Name="build">
+        <Message Text="$(Configuration)"/>
+        <Message Text="$(Platform)"/>
+        <MSBuild Projects="$(Solution)" Targets="rebuild" />
+    </Target>
+
+    <Target Name="pack">
+        <Exec Command="nuget pack &quot;$(NuspecFile)&quot; -version $(Version) -verbosity detailed -outputdirectory &quot;$(NupkgFolder)&quot;" WorkingDirectory="$(NuspecFolder)" />
+    </Target>
+
+    <Target Name="push"> 
+    </Target>
+
+</Project>
+

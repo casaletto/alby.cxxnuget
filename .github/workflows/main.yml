@@ -1,0 +1,56 @@
+
+on: [push]
+
+jobs:
+
+    build:
+        runs-on: windows-latest
+
+        steps:
+        - name: msbuild setup
+          uses: microsoft/setup-msbuild@v1.0.0
+
+        - name: vstest setup
+          uses: darenm/Setup-VSTest@v1
+
+        - name: env
+          run:  set
+          shell: cmd
+
+        - name: nuget version 
+          run:  nuget
+          shell: cmd
+
+        - name: checkout 
+          uses: actions/checkout@master 
+
+        - name: dir
+          run:  get-childitem
+
+        - name: get new version
+          id:   get_new_version
+          uses: mathieudutour/github-tag-action@v4.5 
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            tag_prefix: null
+            dry_run: true
+
+        - name: new version
+          run:  echo [${{ steps.get_new_version.outputs.new_tag }}]
+
+        - name: compile solution 1
+          run:  msbuild sln1\build1.proj /t:clean,version,build,pack,push /p:Version=${{ steps.get_new_version.outputs.new_tag }}
+
+#        - name: compile 
+#          run:  msbuild travellingDistance.sln /t:Clean,Rebuild /p:Configuration=Debug /p:Platform=x64
+
+#        - name: test 
+#          run:  vstest.console.exe bin\travellingDistance.dll /Platform:x64 /Logger:trx
+
+#        - name: bump version and tag
+#          uses: mathieudutour/github-tag-action@v4.5
+#          with:
+#            github_token: ${{ secrets.GITHUB_TOKEN }}
+#            tag_prefix: null
+
+
