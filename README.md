@@ -5,7 +5,7 @@
 
 
 
-This repo just builds a very simple C++ static library, versions it, and packages it, using git actions and github nuget packages.
+This repo just builds a very simple C++ static library, versions it, and packages it, using github actions and github nuget packages.
 
 
 It will be consumed by another C++ repo that I will soon write.
@@ -15,6 +15,8 @@ The only useful function of this library is myclass::version()
 
 
 ```
+#include <alby.mylibrary/alby.myclass.h>
+
 std::cout << alby::mylibrary::myclass::version() << "\n" ;
 ```
 
