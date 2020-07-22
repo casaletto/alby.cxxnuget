@@ -35,7 +35,7 @@ jobs:
           run:  echo [${{ steps.version.outputs.new_tag }}]
 
         - name: compile 
-          run:  msbuild sln1\build1.proj /t:clean,version,build,pack "/p:Version=${{steps.version.outputs.new_tag}}"
+          run:  msbuild sln\build.proj /t:clean,version,build,pack "/p:Version=${{steps.version.outputs.new_tag}}"
 
         - name: tag
           uses: mathieudutour/github-tag-action@v4.5
@@ -46,6 +46,6 @@ jobs:
         - name: package 
           env:
             THE_SOURCE_KEY: ${{secrets.PACKAGES}}
-          run:  msbuild sln1\build1.proj /t:source,push "/p:Version=${{steps.version.outputs.new_tag}}" "/p:SourceKey=%THE_SOURCE_KEY%" "/p:SourceUser=%GITHUB_REPOSITORY_OWNER%"
+          run:  msbuild sln\build.proj /t:source,push "/p:Version=${{steps.version.outputs.new_tag}}" "/p:SourceKey=%THE_SOURCE_KEY%" "/p:SourceUser=%GITHUB_REPOSITORY_OWNER%"
           shell: cmd
 
