@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+
+    <metadata>
+        <id>alby.mylibrary</id>
+        <title>alby.mylibrary</title>
+        <version>0.0.0</version>
+        <authors>alby</authors>
+        <owners>alby</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>alby.mylibrary</description>
+        <copyright>copyright � 2023 alby</copyright>
+        <tags>native C++</tags>
+        <repository type="git" url="https://github.com/casaletto/alby.cxxnuget.git" />
+    </metadata>
+
+    <files>
+        <file src="alby.mylibrary.targets"              target="build" />
+        <file src="..\nupkg\alby.mylibrary.version.txt" target="build" />
+        <file src="..\alby.mylibrary\include\*.*"       target="build\native\include\alby.mylibrary" />
+        <file src="..\alby.mylibrary\lib\*.*"           target="build\native\lib" />
+    </files>
+
+</package>
+
