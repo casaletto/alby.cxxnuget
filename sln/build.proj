@@ -3,6 +3,7 @@
 
 <!--
 localhost
+msbuild sln\build.proj /t:clean,version,build,pack
 msbuild sln\build.proj /t:clean,version,build,pack,source,push "/p:Version=0.0.2" "/p:SourceKey=xxx" "/p:SourceUser=xxx"
 
 github actions

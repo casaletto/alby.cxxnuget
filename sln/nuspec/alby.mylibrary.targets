@@ -13,8 +13,7 @@
 
     <!--
     the following xml island is not required AT ALL for static libs
-    only required for dlls
-    but idgaffoaf and idgafftidgaffoaf
+    only required for dlls and manifests
     -->
     <Target Name="AlbyMyLibraryAfterLink" AfterTargets="Link" >
         <ItemGroup>

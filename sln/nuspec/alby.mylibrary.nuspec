@@ -16,9 +16,9 @@
 
     <files>
         <file src="alby.mylibrary.targets"              target="build" />
-        <file src="..\nupkg\alby.mylibrary.version.txt" target="build" />
         <file src="..\alby.mylibrary\include\*.*"       target="build\native\include\alby.mylibrary" />
         <file src="..\alby.mylibrary\lib\*.*"           target="build\native\lib" />
+        <file src="..\nupkg\alby.mylibrary.version.txt" target="build\native\lib" />
     </files>
 
 </package>

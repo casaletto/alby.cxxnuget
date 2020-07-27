@@ -354,5 +354,5 @@ MigrationBackup/
 /test-results/*.trx
 /test-results/*.xml
 
-sln1/alby.mylibrary/lib/
+sln/alby.mylibrary/lib/
 

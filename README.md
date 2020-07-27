@@ -25,5 +25,5 @@ Command line build
 
 
 ```
-msbuild sln1\build1.proj /t:clean,version,build,pack,source,push "/p:Version=0.0.3" "/p:SourceKey=xxx" "/p:SourceUser=xxx"
+msbuild sln1\build1.proj /t:clean,version,build,pack,source,push "/p:Version=a.b.c" "/p:SourceKey=xxx" "/p:SourceUser=xxx"
 ```
